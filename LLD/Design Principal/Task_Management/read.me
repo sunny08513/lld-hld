@@ -1,0 +1,65 @@
+Task Management system   
+
+Requirement
+- User able to add Task
+- User able to register in the system
+- User should able to update task status(created, inprogress, completed, cancelled)
+- Able to filter task by user name(assignedTo), date, status
+- User should able to add attachment
+- Admin should able to create task and assign user 
+
+Use Case Diagram  
+Actor
+-  User , Admin 
+
+Class Diagram  
+Classes 
+- User, Admin, task,  TaskManagementSystem
+
+User
+ - id
+ - name 
+ - email 
+ ------------
+ AddUser(user)
+ UpdateUser(id, user)
+ DeleteUser(id int)
+ GetUserById(id int)
+
+Admin extends User 
+GetUsers()
+
+Task
+- id int
+- title string
+- description string
+- status((created, inprogress, completed, cancelled)) string
+- createdAt Date 
+- completedAt Date
+- assignedTo User
+- reportedBy User 
+- attachments []string
+----------------
+CreateTask(task)
+Updatetask(id, task)
+GetTaskByFilter(filterType string)
+GetTaskById(id int)
+
+
+TaskManagementSystem
+- id int 
+- tasks []task
+- users []user 
+
+userObj := new(user)
+user := userObj.AddUser() 
+taskmanagementSystem.users = append(user) 
+taskObj := new(task)
+taskObj.CreateTask(task)
+
+
+
+
+
+
+

@@ -1,0 +1,120 @@
+Rate limiting controls the rate at which users or services can access a resource. 
+When the rate of requests exceeds the threshold defined by the rate limiter, the requests are throttled or blocked. 
+Here are some examples
+     A user can send a message no more than 2 per second One can create a maximum of 10 accounts per day from the same IP address One can claim rewards no more than 5 times per week from the same device.
+
+Benefits of Rate Limiting
+1. Prevent Resource Starvation
+   - Prevent Resource starvation caused by DOS(Denial of services) attack.
+2. Reduce Cost 
+   - Rate limiting can help limit cost overruns by preventing the overuse of a resource. 
+     If a resource is overloaded by a high volume of requests, it may require additional resources or capacity to handle the load, which can incur additional costs.
+   - Rate limiting is also critical for services that make outbound requests, especially those that use paid third party APIs. 
+     Many third-party services charge on a per-call basis for their external APIs.
+3. Prevent servers from being overloaded
+   - To reduce server load, a rate limiter is used to reject excess requests early in the request lifecycle made by malicious bots or users with heavy usage.
+
+Rate Limiting Use Case 
+- Rate limiting is commonly applied at the user level. Consider a popular social media platform where users frequently post content and comments. 
+  To prevent spam or malicious bot activity, the platform might enforce user-level rate limiting. 
+  It restricts the number of posts or comments that a user can make in a given hour.
+- Rate limiting can also be applied at the application level. 
+  One example is an online ticketing platform. On the day of a major concert sale, the platform can expect a significant surge in traffic.
+  Application-level rate limit can be very useful in this case. It limits the total number of ticket purchases per minute. This practice protects the system from being overwhelmed and ensures a fair chance for everyone to try to secure a ticket.
+- API-level rate limiting is also common. Consider a cloud storage service that provides an API for uploading and downloading files. 
+  To ensure fair use and protect the system from misuse, the service might enforce limits on the number of API calls each user can make per minute.
+
+#Core Concepts of Rate Limiting
+- The Limit 
+- The window
+- The identifieer
+
+The limit defines the ceiling for allowable requests or actions within a designated time span. 
+For example, we might allow a user to send no more than 100 messages every hour.
+
+Limit -> 100 message 
+Window -> 1 hour
+identifieer -> message userA-userB 
+
+- Another core concept to understand is the different types of rate limiting responses. 
+They generally fall into three categories: blocking, throttling, and shaping.
+
+Rate limiting can be implemented using different algorithms. Each of them has distinct pros and cons. We dive into some of the common rate limiting algorithms in this section. We’ll cover:
+
+- Fixed Window Counter
+
+- Sliding Window Log
+
+- Sliding Window Counter
+
+- Token Bucket
+
+- Leaky Bucket
+
+
+
+
+
+
+
+
+
+
+Notes:
+
+
+Rate Limiter : 
+
+In a network system, a rate limiter is used to control the rate of traffic sent by a client or a service.
+A rate limiter limits the number of client requests allowed to be sent over a specified period.
+
+
+In the HTTP world, If the API request count exceeds the threshold defined by the rate limiter, all the excess calls are blocked or dropped.
+
+    --> A User can write no more than 2 posts per second.
+    --> You can create a maximum of 10 accounts per day from the same IP address.
+    --> You can claim rewards no more than 5 times per week from the same device.
+
+    Rule 1 : API + Entity (User/IP/Device/Area) + Specified time + Action ( Drop , Block , Drop & Notify , Block & Notify ) --> ACL/Firewall Rule
+
+
+Benefits:
+    
+        1. Prevent resource starvation caused by Denial of Service (DoS) attack 
+        2. Reduce cost
+        3. Prevent servers from being overloaded --> Slow 
+
+
+Step 1 - Understand the problem and establish design scope
+
+    Pros and Cons 
+
+    server-side API/ Client-side API. --> server-side API
+
+    Rate limiter throttle API requests based on IP, the user ID, or other properties 
+      - should be flexible 
+    What is the scale of the system?
+      - The system must be able to handle a large number of requests. 
+    Will the system work in a distributed environment?
+      - Yes. 
+    Do we need to inform users who are throttled? 
+      - Yes  
+
+ Requirement 
+  - Limit excessive request 
+  - Rate limiter should not slow down HTTP response time.(low latency)
+  - Use as little memory as possible.
+  - Distributed rate limiting
+  - Notify user (Exception handling.)
+  - Fault tollerante
+
+Step 2 Propose HLD 
+    Where to put the rate limiter?
+     - Server-side or middleware 
+     - Implement within API gateway service. API Gateway(supports rate limiting, SSL termination, authentication, IP whitelisting, servicing static content, etc.)
+     - depends on your company’s current technology stack, engineering resources, priorities, goals, etc. 
+    Algorithms for rate limiting
+     - 
+
+
+    
